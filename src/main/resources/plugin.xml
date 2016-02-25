@@ -25,7 +25,8 @@
     -->
     <properties>
       <property name="step1_property_name" required="true">
-         <property-ui type="textBox" label="Property Name"
+         <property-ui type="textBox"
+             label="Property Name"
              description="The property you want to pass in."
              default-value="42"
              hidden="false" />
@@ -35,20 +36,26 @@
      Also specify a default value
     -->
       <property name="password" required="false">
-        <property-ui type="secureBox" label="Password"
+        <property-ui type="secureBox"
+          label="Password"
           description="The password to be used to connect."
           default-value="${property:resource/password}"
           hidden="true"/>
       </property>
 
       <property name="token" required="false">
-        <property-ui type="textAreaBox" label="Token"
+        <property-ui type="textAreaBox"
+          label="Token"
           description="Use a token instead of a pasword"
           default-value="${property:resource/token}"
           hidden="true"/>
       </property>
 
     </properties>
+
+    <!--
+     Specify the Javascript to be used to process any command output to identify a Success of Falure status return from this step. The behavior below is based on a standard Unix style exit code, if the script/program you are calling out to does not generate and exitCode you will need to perform more inspection to determin status.
+    -->
     <post-processing>
       <![CDATA[
         if (properties.get("exitCode") != 0) {
