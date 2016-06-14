@@ -1,4 +1,9 @@
-## About this plugins
+## About this plugin
+
+## Port Checker
+
+Designed to help you see if a process is using a specific port.
+
 
 ### Setup
 

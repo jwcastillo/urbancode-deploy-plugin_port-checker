@@ -16,41 +16,42 @@
   </header>
 
   <!-- Define each Step the plugin with define -->
-  <step-type name="step1">
+  <step-type name="Test Connect to Port">
     <description>
-      Textual description of step1
+      Attempts to connect to a specific port, used to see if it is currently in use. (i.e. your application is still running). Success of the Step means the port is listening, Failure means the port is not currently listening.
     </description>
     <!--
      Define what we will prompt the user for.
     -->
     <properties>
-      <property name="step1_property_name" required="true">
+      <property name="host" required="true">
          <property-ui type="textBox"
-             label="Property Name"
-             description="The property you want to pass in."
-             default-value="42"
+             label="Hostname"
+             description="Hostname of the machine to connect to."
+             default-value="localhost"
              hidden="false" />
+      </property>
+
+      <property name="port" required="true">
+        <property-ui type="textBox"
+          label="port"
+          description="The port used to connect."
+          default-value=""
+          hidden="false"/>
       </property>
 
     <!-- Define some hidden properties
      Also specify a default value
     -->
-      <property name="password" required="false">
-        <property-ui type="secureBox"
-          label="Password"
-          description="The password to be used to connect."
-          default-value="${property:resource/password}"
-          hidden="true"/>
-      </property>
-
-      <property name="token" required="false">
+<!--
+      <property name="type" required="false">
         <property-ui type="textAreaBox"
           label="Token"
           description="Use a token instead of a pasword"
           default-value="${property:resource/token}"
           hidden="true"/>
       </property>
-
+-->
     </properties>
 
     <!--
@@ -71,7 +72,7 @@
     -->
     <command program="${GROOVY_HOME}/bin/groovy">
       <arg file="runner.groovy"/>
-      <arg file="step1.groovy"/>
+      <arg file="port_check.groovy"/>
       <arg file="${PLUGIN_INPUT_PROPS}"/>
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>

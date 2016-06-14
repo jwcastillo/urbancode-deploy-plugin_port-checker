@@ -1,27 +1,30 @@
 import com.urbancode.air.AirPluginTool
 import com.urbancode.air.XTrustProvider
+import java.net.Socket
 
 final def airTool = new AirPluginTool(args[0], args[1])
 final def props = airTool.getStepProperties()
 XTrustProvider.install()
 
 // Setup properties for plugin
+// Return 0 for port is active, 1 for port that is not listening
 def exitStatus = 0
 
 // Pull in properties from plugin
-println "Getting properties"
-props.each { println it }
+//println "Getting properties"
+//props.each { println it }
 
-def step1_property_name = props['step1_property_name'].trim()
-def password = props['token']?props['token']:props['password']
+def host = props['host'].trim()
+def port = props['port'].trim()?.isInteger()?props['port'].trim().toFloat():null
 
-// do something very important here!
-
-// process result and determine if we failed or not
-if( true )
+try
 {
+  s = new Socket(host, port);
   exitStatus = 0
-}else{
+}
+catch( Exception e)
+{
+  println "Port is not Listening"
   exitStatus = 1
 }
 
